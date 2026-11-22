@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a change to the code-reference hand-off
+title: '[feature] '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        TermMoor's scope is deliberately narrow: the editor ↔ CLI code-reference
+        hand-off in a local Windows x64 PTY. Proposals that add agent management,
+        session persistence, prompt handling, or extra editor commands are out of
+        scope. So are promises of speed or resource usage — this project makes no
+        performance claims.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What you cannot do today, and in which workflow.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: What TermMoor should do. Mention the reference formats or commands involved.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds you use now, including doing it in the CLI or shell yourself.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This stays within the local PTY and the code-reference hand-off.
+          required: true
+        - label: This does not require TermMoor to store sessions, prompts, or CLI history.
+          required: true

@@ -1,0 +1,9 @@
+{
+  "cmd.focus": "Open TermMoor",
+  "cmd.openSidebar": "Open in Secondary Side Bar",
+  "cmd.newSession": "New Terminal",
+  "cmd.sendToTerminal": "Insert Code Context into TermMoor",
+  "cfg.scrollback": "Scrollback lines kept by the TermMoor webview terminal.",
+  "cfg.shellIntegration": "Inject lightweight OSC 133/633 shell integration hooks so TermMoor can detect active CLI/Agent commands, track live working directories, jump between prompts (Ctrl+Up/Down), capture exact last-command output, and notify on long-running commands.",
+  "cfg.longRunningThreshold": "Notify when a background or unfocused command finishes after running at least this many seconds. Set to 0 to disable."
+}

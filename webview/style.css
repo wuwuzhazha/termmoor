@@ -1,0 +1,431 @@
+:root {
+  color-scheme: light dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--vscode-sideBar-background, var(--vscode-editor-background));
+  color: var(--vscode-sideBar-foreground, var(--vscode-foreground));
+  font-family: var(--vscode-font-family);
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Compact tab strip: always visible so the add button is reachable. */
+.tab-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border, rgba(128, 128, 128, 0.18));
+  user-select: none;
+}
+
+.tab-bar[hidden] {
+  display: none;
+}
+
+.tab-list {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.tab-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-bar.reordering {
+  cursor: grabbing;
+}
+
+.tab-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  max-width: 165px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--vscode-foreground) 6%, transparent);
+  color: var(--vscode-descriptionForeground, inherit);
+  font-size: 11px;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+  touch-action: none;
+}
+
+.tab-pill:hover {
+  background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
+}
+
+.tab-pill.active {
+  background: color-mix(in srgb, var(--vscode-foreground) 14%, transparent);
+  border-color: var(--vscode-widget-border, rgba(128, 128, 128, 0.3));
+  color: var(--vscode-foreground);
+}
+
+.tab-pill.dragging {
+  z-index: 5;
+  transform: translateY(-1px) scale(1.03);
+  border-color: var(--vscode-focusBorder, #007fd4);
+  background: var(--vscode-editorWidget-background, #252526);
+  color: var(--vscode-foreground);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  cursor: grabbing;
+}
+
+.tab-pill.exited-tab {
+  opacity: 0.65;
+}
+
+.tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 2px 5px 2px 7px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+/* The tab button owns the strip's single focus stop; make it unmistakable. */
+.tab-label:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder, #007fd4);
+  outline-offset: -1px;
+}
+
+.tab-pill:focus-within {
+  border-color: var(--vscode-focusBorder, #007fd4);
+}
+
+.tab-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-num {
+  flex: 0 0 auto;
+  min-width: 9px;
+  color: var(--vscode-descriptionForeground, inherit);
+  font-size: 10px;
+  line-height: 1;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.tab-pill.active .tab-num {
+  opacity: 0.85;
+}
+
+.tab-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.88;
+}
+
+.tab-dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vscode-charts-green, #23d18b);
+}
+
+.tab-dot.warn {
+  background: var(--vscode-charts-orange, #cca700);
+}
+
+.tab-dot.bell {
+  background: var(--vscode-charts-blue, #3b8eea);
+}
+
+.tab-close {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 18px;
+  padding: 0;
+  margin-right: 2px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0;
+  visibility: visible;
+  cursor: pointer;
+  transition:
+    opacity 0.1s ease,
+    background 0.1s ease;
+}
+
+/* Keep the close affordance for the active tab, reveal it on hover otherwise. */
+.tab-pill:hover .tab-close,
+.tab-pill.active .tab-close {
+  opacity: 0.55;
+  visibility: visible;
+}
+
+.tab-pill:focus-within .tab-close {
+  opacity: 1;
+}
+
+.tab-close:hover,
+.tab-add:hover,
+.mini-btn:hover {
+  opacity: 1;
+  background: var(--vscode-toolbar-hoverBackground, rgba(128, 128, 128, 0.2));
+}
+
+.tab-close:focus-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tab-add {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vscode-descriptionForeground, inherit);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Terminal stack */
+.terminal-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.terminal-stack,
+.terminal-pane {
+  position: absolute;
+  inset: 0;
+}
+
+.terminal-pane[hidden] {
+  display: none;
+}
+
+/* Compact in-flow search row (never overlays terminal output) */
+.search-row {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border, rgba(128, 128, 128, 0.18));
+  background: var(--vscode-editorWidget-background, var(--vscode-sideBar-background));
+}
+
+.search-row[hidden] {
+  display: none;
+}
+
+.search-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 2px 5px;
+  border: 1px solid var(--vscode-input-border, transparent);
+  border-radius: 3px;
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  font: inherit;
+  font-size: 11.5px;
+  outline: none;
+}
+
+.search-row input:focus {
+  border-color: var(--vscode-focusBorder, #007fd4);
+}
+
+.search-count {
+  flex: 0 0 auto;
+  min-width: 30px;
+  padding: 0 3px;
+  color: var(--vscode-descriptionForeground, inherit);
+  font-size: 10.5px;
+  text-align: center;
+  user-select: none;
+}
+
+.mini-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--vscode-foreground);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Exited overlay */
+.exited {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: color-mix(in srgb, var(--vscode-sideBar-background, #1e1e1e) 84%, transparent);
+  color: var(--vscode-descriptionForeground, inherit);
+}
+
+.exited[hidden] {
+  display: none;
+}
+
+.exited button {
+  padding: 3px 10px;
+  border: 1px solid var(--vscode-button-border, transparent);
+  border-radius: 4px;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+
+.hint {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px 4px;
+  border-top: 1px solid var(--vscode-sideBarSectionHeader-border, transparent);
+  color: var(--vscode-descriptionForeground, inherit);
+  font-size: 10.5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.hint-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 20px);
+  padding: 5px 10px;
+  border: 1px solid var(--vscode-widget-border, transparent);
+  border-radius: 4px;
+  background: var(--vscode-notifications-background, var(--vscode-editorWidget-background));
+  color: var(--vscode-notifications-foreground, inherit);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-size: 11px;
+  z-index: 25;
+}
+
+.toast.warn {
+  border-color: var(--vscode-inputValidation-warningBorder, transparent);
+}
+
+.toast.error {
+  border-color: var(--vscode-inputValidation-errorBorder, transparent);
+}
+
+.menu {
+  position: fixed;
+  z-index: 30;
+  min-width: 210px;
+  padding: 4px;
+  border: 1px solid var(--vscode-menu-border, var(--vscode-widget-border, transparent));
+  border-radius: 5px;
+  background: var(--vscode-menu-background, var(--vscode-editorWidget-background));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--vscode-menu-foreground, inherit);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu button:hover:not(:disabled) {
+  background: var(--vscode-menu-selectionBackground, var(--vscode-list-hoverBackground));
+  color: var(--vscode-menu-selectionForeground, inherit);
+}
+
+.menu button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder, #007fd4);
+  outline-offset: -1px;
+  background: var(--vscode-menu-selectionBackground, var(--vscode-list-hoverBackground));
+  color: var(--vscode-menu-selectionForeground, inherit);
+}
+
+.menu button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.menu button.sep {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--vscode-menu-separatorBackground, var(--vscode-widget-border, transparent));
+  border-radius: 0 0 3px 3px;
+}
+
+/* Shared keyboard focus ring for every interactive control. */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role='tab']:focus-visible,
+[role='menuitem']:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder, #007fd4);
+  outline-offset: -1px;
+}

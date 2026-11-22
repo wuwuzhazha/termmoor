@@ -1,0 +1,153 @@
+{
+  "name": "termmoor",
+  "displayName": "TermMoor",
+  "description": "Editor-symbiotic sidebar terminal: OSC 133/633 shell hooks, in-panel search, editable tab strip, clickable file references, and one editor-to-CLI code-context command.",
+  "version": "0.9.0",
+  "publisher": "wuwuzhazha",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuwuzhazha/termmoor.git"
+  },
+  "homepage": "https://github.com/wuwuzhazha/termmoor#readme",
+  "bugs": {
+    "url": "https://github.com/wuwuzhazha/termmoor/issues"
+  },
+  "engines": {
+    "vscode": "^1.106.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "termmoor",
+    "terminal",
+    "shell",
+    "powershell",
+    "pty",
+    "sidebar"
+  ],
+  "activationEvents": [
+    "onView:agentTerminal.view"
+  ],
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    }
+  },
+  "files": [
+    "dist/**",
+    "media/**",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.txt",
+    "CHANGELOG.md",
+    "package.json",
+    "package.nls*.json"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "secondarySidebar": [
+        {
+          "id": "agentTerminal",
+          "title": "TermMoor",
+          "icon": "media/terminal.svg"
+        }
+      ]
+    },
+    "views": {
+      "agentTerminal": [
+        {
+          "type": "webview",
+          "id": "agentTerminal.view",
+          "name": "TermMoor",
+          "icon": "media/terminal.svg",
+          "contextualTitle": "TermMoor"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "agentTerminal.focus",
+        "title": "%cmd.focus%",
+        "category": "TermMoor",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "agentTerminal.openSidebar",
+        "title": "%cmd.openSidebar%",
+        "category": "TermMoor"
+      },
+      {
+        "command": "agentTerminal.newSession",
+        "title": "%cmd.newSession%",
+        "category": "TermMoor",
+        "icon": "$(add)"
+      },
+      {
+        "command": "agentTerminal.sendToTerminal",
+        "title": "%cmd.sendToTerminal%",
+        "category": "TermMoor"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "agentTerminal.sendToTerminal",
+        "key": "ctrl+alt+enter",
+        "mac": "cmd+alt+enter",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "agentTerminal.sendToTerminal",
+          "group": "navigation@90"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TermMoor",
+      "properties": {
+        "agentTerminal.terminal.scrollback": {
+          "type": "number",
+          "default": 5000,
+          "minimum": 0,
+          "description": "%cfg.scrollback%"
+        },
+        "agentTerminal.terminal.shellIntegration": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.shellIntegration%"
+        },
+        "agentTerminal.terminal.longRunningThresholdSeconds": {
+          "type": "number",
+          "default": 10,
+          "minimum": 0,
+          "description": "%cfg.longRunningThreshold%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit && node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package": "npm run build && node scripts/package.mjs",
+    "verify:vsix": "node scripts/verify-vsix.mjs --target win32-x64",
+    "test": "node scripts/test.mjs"
+  },
+  "devDependencies": {
+    "@homebridge/node-pty-prebuilt-multiarch": "^0.15.0",
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.106.0",
+    "@vscode/vsce": "^3.2.0",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-web-links": "^0.11.0",
+    "@xterm/xterm": "^5.5.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0"
+  }
+}

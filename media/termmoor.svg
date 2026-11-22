@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64">
+  <title>TermMoor</title>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#102A35" />
+  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" fill="none" stroke="#34515B" />
+  <g transform="translate(6 6) scale(2.166667)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m3.5 7.5 5 4.5-5 4.5" stroke="#F4FAFB" />
+    <path d="M11 17h5" stroke="#63E6BE" />
+    <circle cx="16" cy="13" r="4" stroke="#63E6BE" />
+  </g>
+</svg>

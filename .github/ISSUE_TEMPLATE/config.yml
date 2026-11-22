@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/wuwuzhazha/termmoor/security/advisories/new
+    about: Do not open a public issue for vulnerabilities. Use private advisories; see SECURITY.md.
+  - name: Read the documentation first
+    url: https://github.com/wuwuzhazha/termmoor#readme
+    about: Install steps, platform limits (Windows x64 only), package identity, and development gates.

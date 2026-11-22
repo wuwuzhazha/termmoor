@@ -1,0 +1,9 @@
+{
+  "cmd.focus": "打开 TermMoor",
+  "cmd.openSidebar": "在辅助侧边栏中打开",
+  "cmd.newSession": "新建终端",
+  "cmd.sendToTerminal": "将代码上下文填入 TermMoor",
+  "cfg.scrollback": "TermMoor 终端保留的历史回滚行数。",
+  "cfg.shellIntegration": "启用轻量级 OSC 133/633 Shell Integration 钩子，支持实时识别运行中的 CLI/Agent 名称、跟踪当前目录、提示符上下跳转（Ctrl+Up/Down）、精准提取命令输出及长耗时完成通知。",
+  "cfg.longRunningThreshold": "后台或未聚焦终端中的命令运行超过该秒数并完成时弹出通知，设为 0 则关闭。"
+}

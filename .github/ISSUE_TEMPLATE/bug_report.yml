@@ -1,0 +1,94 @@
+name: Bug report
+description: A defect in a TermMoor build you made from this source tree
+title: '[bug] '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        TermMoor is currently **Windows x64 only** and **not published** — report
+        against a VSIX you built from this tree, on VSCodium/VS Code `^1.106.0`.
+
+        Do not report security issues here: read `SECURITY.md` and use private
+        advisories instead. Remove credentials, tokens, private paths, and
+        personal data from anything you paste.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Minimal numbered steps from a fresh window.
+      placeholder: |
+        1. Build and install the VSIX from commit ...
+        2. Open a folder containing ...
+        3. Press Ctrl+Alt+Enter / click ...
+        4. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      placeholder: |
+        Expected: ...
+        Actual: ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: TermMoor version and VSIX file name
+      placeholder: 0.9.0 — termmoor-0.9.0-win32-x64.vsix
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Build source
+      description: Commit SHA or branch you built the VSIX from.
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Host product and version
+      placeholder: VSCodium 1.106.x / VS Code 1.106.x
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version and architecture
+      placeholder: Windows 11 24H2, x64
+    validations:
+      required: true
+  - type: dropdown
+    id: shell
+    attributes:
+      label: Shell in the affected tab
+      options:
+        - powershell.exe
+        - cmd.exe
+        - Other (describe in steps)
+  - type: input
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: Values of the three agentTerminal.terminal.* settings, if they matter.
+      placeholder: scrollback=5000, shellIntegration=true, longRunningThresholdSeconds=10
+  - type: textarea
+    id: logs
+    attributes:
+      label: Minimal log excerpt (optional)
+      description: Redacted output from the TermMoor panel or the extension host log.
+      render: text
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Checklist
+      options:
+        - label: This is not a security issue and contains no credentials or tokens.
+          required: true
+        - label: I reproduced this on Windows x64 with a VSIX built from this tree.
+          required: true
+        - label: I checked that the same behavior is not caused by the CLI or shell I ran inside the terminal.
+          required: true
